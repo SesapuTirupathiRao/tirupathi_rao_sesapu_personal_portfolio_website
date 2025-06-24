@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Code2 } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Menu, X, Code2 } from "lucide-react";
+import { images } from "../assets/images";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,29 +10,40 @@ const Header = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navItems = [
-    { href: '#about', label: 'About' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#courses', label: 'Courses' },
-    { href: '#content', label: 'Content' },
-    { href: '#contact', label: 'Contact' },
+    { href: "#about", label: "About" },
+    { href: "#projects", label: "Projects" },
+    { href: "#courses", label: "Courses" },
+    { href: "#content", label: "Content" },
+    { href: "#contact", label: "Contact" },
   ];
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-black/95 backdrop-blur-md shadow-lg shadow-yellow-500/20' : 'bg-transparent'
-    }`}>
+    <header
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-black/95 backdrop-blur-md shadow-lg shadow-yellow-500/20"
+          : "bg-transparent"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-lg flex items-center justify-center">
-              <Code2 className="w-5 h-5 text-black" />
+            <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center">
+              {/* <Code2 className="w-5 h-5 text-black" /> */}
+              <img
+                src={images.profile}
+                alt="Profile"
+                className="w-full h-full object-cover rounded-full"
+              />
             </div>
-            <span className="font-bold text-xl text-white">Tirupathi Rao</span>
+            <span className="font-bold text-xl text-white">
+              Tirupathi Rao Sesapu
+            </span>
           </div>
 
           {/* Desktop Navigation */}
