@@ -71,25 +71,29 @@ const Footer = () => {
             </h3>
             <div className="space-y-2">
               <a
-                href="#"
+                href="https://www.youtube.com/@strtelugu"
+                target="_blank"
                 className="block text-gray-400 hover:text-yellow-400 transition-colors duration-200"
               >
                 YouTube Channel
               </a>
               <a
-                href="#"
+                href="https://stredututs.blogspot.com/p/blog-page.html"
+                target="_blank"
                 className="block text-gray-400 hover:text-yellow-400 transition-colors duration-200"
               >
                 Blog
               </a>
               <a
-                href="#"
+                href="https://github.com/TirupathiRaoSesapu"
+                target="_blank"
                 className="block text-gray-400 hover:text-yellow-400 transition-colors duration-200"
               >
                 GitHub
               </a>
               <a
                 href="mailto:tirupathistr@gmail.com"
+                target="_blank"
                 className="block text-gray-400 hover:text-yellow-400 transition-colors duration-200"
               >
                 Email
