@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="min-h-screen">
       {/* your components */}
-      <ToastContainer position="top-right" autoClose={5000} theme="dark" />
+      <ToastContainer position="top-right" autoClose={5000}/>
       <Header />
       <Hero />
       <About />
