@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 import {
   Mail,
@@ -12,6 +13,42 @@ import {
 
 const Contact = () => {
   const [modalType, setModalType] = useState(null);
+  // --‑ Start‑Learning form state
+  const [learnForm, setLearnForm] = useState({
+    fullName: "",
+    email: "",
+    mobile: "",
+    course: "",
+    goals: "",
+  });
+
+  // keep inputs in sync
+  const handleLearnChange = (e) =>
+    setLearnForm({ ...learnForm, [e.target.name]: e.target.value });
+
+  // submit → save to Firebase + send email
+  const handleLearnSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await fetch("/api/start-learning", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(learnForm),
+      });
+      toast.success("Thanks! I’ll get back to you shortly 🚀");
+      setLearnForm({
+        fullName: "",
+        email: "",
+        mobile: "",
+        course: "",
+        goals: "",
+      });
+      closeModal();
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Try again!");
+    }
+  };
 
   const closeModal = () => setModalType(null);
 
@@ -191,24 +228,42 @@ const Contact = () => {
                         <h2 className="text-2xl font-bold mb-4 text-yellow-400 text-center">
                           Start Learning With Me
                         </h2>
-                        <form className="space-y-4">
+                        <form
+                          className="space-y-4"
+                          onSubmit={handleLearnSubmit}
+                        >
                           <input
+                            name="fullName"
+                            value={learnForm.fullName}
+                            onChange={handleLearnChange}
                             className="w-full p-3 rounded bg-gray-800 text-white placeholder:text-gray-400"
                             placeholder="Full Name"
+                            required
                           />
                           <input
                             type="email"
+                            name="email"
+                            value={learnForm.email}
+                            onChange={handleLearnChange}
                             className="w-full p-3 rounded bg-gray-800 text-white placeholder:text-gray-400"
                             placeholder="Email Address"
+                            required
                           />
                           <input
-                            type="number"
+                            type="tel"
+                            name="mobile"
+                            value={learnForm.mobile}
+                            onChange={handleLearnChange}
                             className="w-full p-3 rounded bg-gray-800 text-white placeholder:text-gray-400"
                             placeholder="Mobile Number"
+                            required
                           />
                           <select
-                            className="w-full p-3 rounded bg-gray-800 text-white"
                             name="course"
+                            value={learnForm.course}
+                            onChange={handleLearnChange}
+                            className="w-full p-3 rounded bg-gray-800 text-white"
+                            required
                           >
                             <option>Select Your Interested Course</option>
                             {courseOptions.map((course, index) => (
@@ -218,6 +273,9 @@ const Contact = () => {
                             ))}
                           </select>
                           <textarea
+                            name="goals"
+                            value={learnForm.goals}
+                            onChange={handleLearnChange}
                             className="w-full p-3 rounded bg-gray-800 text-white placeholder:text-gray-400"
                             placeholder="Your Learning Goals"
                           ></textarea>

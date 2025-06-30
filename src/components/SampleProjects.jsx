@@ -192,7 +192,7 @@ const SampleProjects = () => {
               />
               <textarea
                 className="w-full p-3 rounded bg-gray-800 text-white"
-                placeholder="Your Requirements..."
+                placeholder="Any other queries..."
               ></textarea>
               <button
                 type="submit"

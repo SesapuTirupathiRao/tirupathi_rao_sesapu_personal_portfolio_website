@@ -7,10 +7,14 @@ import Content from "./components/Content";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import SampleProjects from "./components/SampleProjects";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <div className="min-h-screen">
+      {/* your components */}
+      <ToastContainer position="top-right" autoClose={5000} theme="dark" />
       <Header />
       <Hero />
       <About />
