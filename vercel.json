@@ -14,5 +14,17 @@
     { "src": "/api/(.*)", "dest": "/api/$1.js" },
     { "handle": "filesystem" },
     { "src": "/.*", "dest": "/index.html" }
-  ]
+  ],
+  "build": {
+    "env": {
+      "SUPABASE_URL": "@SUPABASE_URL",
+      "SUPABASE_SERVICE_ROLE": "@SUPABASE_SERVICE_ROLE",
+      "RESEND_API_KEY": "@RESEND_API_KEY"
+    }
+  },
+  "functions": {
+    "api/**.js": {
+      "runtime": "nodejs18.x"
+    }
+  }
 }
