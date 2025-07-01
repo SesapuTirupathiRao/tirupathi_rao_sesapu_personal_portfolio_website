@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-
 import {
   Mail,
   Instagram,
@@ -13,7 +12,7 @@ import {
 
 const Contact = () => {
   const [modalType, setModalType] = useState(null);
-  // --‑ Start‑Learning form state
+
   const [learnForm, setLearnForm] = useState({
     fullName: "",
     email: "",
@@ -30,22 +29,23 @@ const Contact = () => {
     description: "",
   });
 
-  // keep inputs in sync
   const handleLearnChange = (e) =>
     setLearnForm({ ...learnForm, [e.target.name]: e.target.value });
 
   const handleHireChange = (e) =>
     setHireForm({ ...hireForm, [e.target.name]: e.target.value });
 
-  // submit → save to Firebase + send email
   const handleLearnSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch("/api/start-learning", {
+      const res = await fetch("/api/start-learning", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(learnForm),
       });
+
+      if (!res.ok) throw new Error("Submission failed");
+
       toast.success("Thanks! I’ll get back to you shortly 🚀");
       setLearnForm({
         fullName: "",
@@ -54,7 +54,7 @@ const Contact = () => {
         course: "",
         goals: "",
       });
-      closeModal();
+      setModalType(null);
     } catch (err) {
       console.error(err);
       toast.error("Something went wrong. Try again!");
@@ -64,11 +64,14 @@ const Contact = () => {
   const handleHireSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch("/api/hire-request", {
+      const res = await fetch("/api/hire-request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(hireForm),
       });
+
+      if (!res.ok) throw new Error("Submission failed");
+
       toast.success("Hire request submitted successfully!");
       setHireForm({
         fullName: "",
@@ -77,7 +80,7 @@ const Contact = () => {
         techStack: "",
         description: "",
       });
-      closeModal();
+      setModalType(null);
     } catch (err) {
       console.error(err);
       toast.error("Something went wrong. Try again!");
@@ -156,7 +159,6 @@ const Contact = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
           <div className="space-y-8">
             <div>
               <h3 className="text-2xl font-bold text-white mb-6">
@@ -210,18 +212,15 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* CTA Section */}
           <div className="space-y-8">
             <div className="relative z-10">
-              {/* Original Yellow Section */}
               <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl p-8 text-black">
                 <h3 className="text-2xl font-bold mb-4">
                   Ready to Start Learning?
                 </h3>
                 <p className="text-black/80 mb-6 leading-relaxed">
                   Join thousands of students who have transformed their careers
-                  through my courses and content. Let's build something amazing
-                  together!
+                  through my courses and content.
                 </p>
                 <div className="space-y-4">
                   <button
@@ -239,12 +238,8 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Popup Modal */}
               {modalType && (
-                <div
-                  className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50"
-                  onClick={closeModal}
-                >
+                <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50">
                   <div
                     className="bg-[#111827] rounded-xl shadow-2xl w-full max-w-xl p-6 text-white relative"
                     onClick={(e) => e.stopPropagation()}
@@ -256,7 +251,6 @@ const Contact = () => {
                       &times;
                     </button>
 
-                    {/* Start Learning Modal */}
                     {modalType === "learn" && (
                       <>
                         <h2 className="text-2xl font-bold mb-4 text-yellow-400 text-center">
@@ -327,7 +321,6 @@ const Contact = () => {
                       </>
                     )}
 
-                    {/* Hire Me Modal */}
                     {modalType === "hire" && (
                       <>
                         <h2 className="text-2xl font-bold mb-4 text-center text-yellow-400">
@@ -336,7 +329,7 @@ const Contact = () => {
                         <form className="space-y-4" onSubmit={handleHireSubmit}>
                           <input
                             name="fullName"
-                            value={hireForm.nameOrCompany}
+                            value={hireForm.fullName}
                             onChange={handleHireChange}
                             className="w-full p-3 rounded bg-gray-800 text-white placeholder:text-gray-400"
                             placeholder="Full Name / Company"
@@ -365,7 +358,7 @@ const Contact = () => {
                           </select>
                           <input
                             name="techStack"
-                            value={hireForm.stack}
+                            value={hireForm.techStack}
                             onChange={handleHireChange}
                             className="w-full p-3 rounded bg-gray-800 text-white placeholder:text-gray-400"
                             placeholder="Technology Stack (e.g. Python, Django)"
@@ -400,37 +393,22 @@ const Contact = () => {
                 What I Offer
               </h3>
               <div className="space-y-4">
-                <div className="flex items-start">
-                  <div className="w-6 h-6 bg-yellow-500 rounded-full flex-shrink-0 mt-1 mr-3"></div>
-                  <div>
-                    <h4 className="font-semibold text-white">
-                      Custom Development
-                    </h4>
-                    <p className="text-gray-300">
-                      Python, React, Django web applications
-                    </p>
+                {[
+                  [
+                    "Custom Development",
+                    "Python, React, Django web applications",
+                  ],
+                  ["Educational Content", "Course creation and tech tutorials"],
+                  ["Mentoring", "One-on-one guidance for aspiring developers"],
+                ].map(([title, desc], idx) => (
+                  <div key={idx} className="flex items-start">
+                    <div className="w-6 h-6 bg-yellow-500 rounded-full flex-shrink-0 mt-1 mr-3"></div>
+                    <div>
+                      <h4 className="font-semibold text-white">{title}</h4>
+                      <p className="text-gray-300">{desc}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-6 h-6 bg-yellow-500 rounded-full flex-shrink-0 mt-1 mr-3"></div>
-                  <div>
-                    <h4 className="font-semibold text-white">
-                      Educational Content
-                    </h4>
-                    <p className="text-gray-300">
-                      Course creation and tech tutorials
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-6 h-6 bg-yellow-500 rounded-full flex-shrink-0 mt-1 mr-3"></div>
-                  <div>
-                    <h4 className="font-semibold text-white">Mentoring</h4>
-                    <p className="text-gray-300">
-                      One-on-one guidance for aspiring developers
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
