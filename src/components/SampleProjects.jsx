@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { images } from "../assets/images";
+import { toast } from "react-toastify";
 
 const sampleProjects = [
   {
@@ -48,6 +49,43 @@ const sliderSettings = {
 const SampleProjects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [showContactPopup, setShowContactPopup] = useState(false);
+
+  const [projectForm, setProjectForm] = useState({
+    fullName: "",
+    email: "",
+    mobile: "",
+    projectTitle: "",
+    description: "",
+  });
+
+  const handleProjectChange = (e) =>
+    setProjectForm({ ...projectForm, [e.target.name]: e.target.value });
+
+  const handleProjectSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const resp = await fetch("/api/create-project", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(projectForm),
+      });
+
+      if (!resp.ok) throw new Error("Request failed");
+
+      toast.success("Project request sent successfully!");
+      setProjectForm({
+        fullName: "",
+        email: "",
+        mobile: "",
+        projectTitle: "",
+        description: "",
+      });
+      setShowContactPopup(false);
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Try again!");
+    }
+  };
 
   return (
     <section className="py-16 px-4 md:px-12 bg-gray-950 text-white">
@@ -169,31 +207,49 @@ const SampleProjects = () => {
               Contact to Create: {selectedProject?.title}
             </h2>
 
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleProjectSubmit}>
               <input
+                name="fullName"
+                value={projectForm.fullName}
+                onChange={handleProjectChange}
                 className="w-full p-3 rounded bg-gray-800 text-white"
                 placeholder="Your Name"
+                required
               />
               <input
                 type="email"
+                name="email"
+                value={projectForm.email}
+                onChange={handleProjectChange}
                 className="w-full p-3 rounded bg-gray-800 text-white"
                 placeholder="Your Email"
+                required
               />
               <input
-                type="number"
+                type="tel"
+                name="mobile"
+                value={projectForm.mobile}
+                onChange={handleProjectChange}
                 className="w-full p-3 rounded bg-gray-800 text-white"
                 placeholder="Mobile Number"
+                required
               />
               <input
                 type="text"
-                className="w-full p-3 rounded bg-gray-800 text-white"
+                name="projectTitle"
                 value={selectedProject?.title || ""}
                 readOnly
+                className="w-full p-3 rounded bg-gray-800 text-white"
+                placeholder="Project Title"
               />
               <textarea
+                name="description"
+                value={projectForm.description}
+                onChange={handleProjectChange}
                 className="w-full p-3 rounded bg-gray-800 text-white"
                 placeholder="Any other queries..."
-              ></textarea>
+                required
+              />
               <button
                 type="submit"
                 className="bg-yellow-500 text-black font-semibold px-4 py-2 rounded hover:bg-yellow-600"

@@ -22,9 +22,20 @@ const Contact = () => {
     goals: "",
   });
 
+  const [hireForm, setHireForm] = useState({
+    fullName: "",
+    email: "",
+    projectType: "",
+    techStack: "",
+    description: "",
+  });
+
   // keep inputs in sync
   const handleLearnChange = (e) =>
     setLearnForm({ ...learnForm, [e.target.name]: e.target.value });
+
+  const handleHireChange = (e) =>
+    setHireForm({ ...hireForm, [e.target.name]: e.target.value });
 
   // submit → save to Firebase + send email
   const handleLearnSubmit = async (e) => {
@@ -42,6 +53,29 @@ const Contact = () => {
         mobile: "",
         course: "",
         goals: "",
+      });
+      closeModal();
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Try again!");
+    }
+  };
+
+  const handleHireSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await fetch("/api/hire-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(hireForm),
+      });
+      toast.success("Hire request submitted successfully!");
+      setHireForm({
+        fullName: "",
+        email: "",
+        projectType: "",
+        techStack: "",
+        description: "",
       });
       closeModal();
     } catch (err) {
@@ -297,29 +331,51 @@ const Contact = () => {
                         <h2 className="text-2xl font-bold mb-4 text-center text-yellow-400">
                           Hire Me for Your Project
                         </h2>
-                        <form className="space-y-4">
+                        <form className="space-y-4" onSubmit={handleHireSubmit}>
                           <input
+                            name="nameOrCompany"
+                            value={hireForm.nameOrCompany}
+                            onChange={handleHireChange}
                             className="w-full p-3 rounded bg-gray-800 text-white placeholder:text-gray-400"
                             placeholder="Full Name / Company"
+                            required
                           />
                           <input
                             type="email"
+                            name="email"
+                            value={hireForm.email}
+                            onChange={handleHireChange}
                             className="w-full p-3 rounded bg-gray-800 text-white placeholder:text-gray-400"
                             placeholder="Email Address"
+                            required
                           />
-                          <select className="w-full p-3 rounded bg-gray-800 text-white">
-                            <option>Project Type</option>
+                          <select
+                            name="projectType"
+                            value={hireForm.projectType}
+                            onChange={handleHireChange}
+                            className="w-full p-3 rounded bg-gray-800 text-white"
+                            required
+                          >
+                            <option value="">Select Project Type</option>
                             <option>Website</option>
                             <option>Python App</option>
                             <option>Tech Training</option>
                           </select>
                           <input
+                            name="stack"
+                            value={hireForm.stack}
+                            onChange={handleHireChange}
                             className="w-full p-3 rounded bg-gray-800 text-white placeholder:text-gray-400"
                             placeholder="Technology Stack (e.g. Python, Django)"
+                            required
                           />
                           <textarea
+                            name="description"
+                            value={hireForm.description}
+                            onChange={handleHireChange}
                             className="w-full p-3 rounded bg-gray-800 text-white placeholder:text-gray-400"
                             placeholder="Project Description"
+                            required
                           ></textarea>
                           <div className="flex justify-center">
                             <button
