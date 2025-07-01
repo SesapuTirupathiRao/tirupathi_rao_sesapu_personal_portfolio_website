@@ -14,36 +14,34 @@ export default async function handler(req, res) {
   );
 
   const { error: dbErr } = await supabase
-    .from("learn_requests")
+    .from("tirupathi_rao_sesapu")
     .insert([{ full_name: fullName, email, mobile, course, goals }]);
 
   if (dbErr) return res.status(500).json({ error: "DB insert failed", dbErr });
 
-  // 2) Send email via Resend
-  const emailResp = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: "Portfolio Bot <noreply@tirupathiraosesapu.vercel.com>", // verified sender
-      to: "tirupathiraosesapu@gmail.com",
-      subject: `New “Start Learning” request – ${fullName}`,
-      html: `
-        <h2>Start Learning with Me – New Submission</h2>
-        <p><b>Name:</b> ${fullName}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Mobile:</b> ${mobile}</p>
-        <p><b>Course:</b> ${course}</p>
-        <p><b>Goals:</b> ${goals}</p>
-      `,
-    }),
-  });
+  // 3) Send simple fallback notification via FormSubmit.io
+  const formSubmitResp = await fetch(
+    "https://formsubmit.io/send/tirupathiraosesapu@gmail.com",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: fullName,
+        email: email,
+        mobile: mobile,
+        course: course,
+        goals: goals,
+        _captcha: false, // disable captcha if you want
+      }),
+    }
+  );
 
-  if (!emailResp.ok) {
-    const err = await emailResp.text();
-    return res.status(500).json({ error: "Email failed", err });
+  // Optional: log or handle failure silently
+  if (!formSubmitResp.ok) {
+    const text = await formSubmitResp.text();
+    console.error("FormSubmit email failed:", text);
   }
 
   return res.status(200).json({ success: true });
