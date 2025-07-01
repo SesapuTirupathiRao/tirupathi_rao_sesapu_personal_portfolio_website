@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   );
 
   const { error: dbErr } = await supabase
-    .from("tirupathi_rao_sesapu")
+    .from("start_learning_with_me")
     .insert([{ full_name: fullName, email, mobile, course, goals }]);
 
   if (dbErr) return res.status(500).json({ error: "DB insert failed", dbErr });
