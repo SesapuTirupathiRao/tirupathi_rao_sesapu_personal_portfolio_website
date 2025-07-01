@@ -299,7 +299,9 @@ const Contact = () => {
                             className="w-full p-3 rounded bg-gray-800 text-white"
                             required
                           >
-                            <option>Select Your Interested Course</option>
+                            <option value="">
+                              Select Your Interested Course
+                            </option>
                             {courseOptions.map((course, index) => (
                               <option key={index} value={course}>
                                 {course}
@@ -333,7 +335,7 @@ const Contact = () => {
                         </h2>
                         <form className="space-y-4" onSubmit={handleHireSubmit}>
                           <input
-                            name="nameOrCompany"
+                            name="fullName"
                             value={hireForm.nameOrCompany}
                             onChange={handleHireChange}
                             className="w-full p-3 rounded bg-gray-800 text-white placeholder:text-gray-400"
@@ -362,7 +364,7 @@ const Contact = () => {
                             <option>Tech Training</option>
                           </select>
                           <input
-                            name="stack"
+                            name="techStack"
                             value={hireForm.stack}
                             onChange={handleHireChange}
                             className="w-full p-3 rounded bg-gray-800 text-white placeholder:text-gray-400"

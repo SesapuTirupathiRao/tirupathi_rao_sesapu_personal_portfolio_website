@@ -63,11 +63,16 @@ const SampleProjects = () => {
 
   const handleProjectSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const resp = await fetch("/api/create-project", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(projectForm),
+        body: JSON.stringify({
+          ...projectForm,
+          projectTitle: selectedProject?.title || "",
+          techStack: selectedProject?.tech?.join(", ") || "", // join array to string
+        }),
       });
 
       if (!resp.ok) throw new Error("Request failed");
