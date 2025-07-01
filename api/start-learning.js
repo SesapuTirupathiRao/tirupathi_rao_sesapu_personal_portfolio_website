@@ -17,7 +17,10 @@ export default async function handler(req, res) {
     .from("start_learning_with_me")
     .insert([{ full_name: fullName, email, mobile, course, goals }]);
 
-  if (dbErr) return res.status(500).json({ error: "DB insert failed", dbErr });
+  if (dbErr) {
+    console.error("Supabase Insert Error:", dbErr);
+    return res.status(500).json({ error: "DB insert failed", dbErr });
+  }
 
   // 3) Send simple fallback notification via FormSubmit.io
   const formSubmitResp = await fetch(
@@ -42,6 +45,7 @@ export default async function handler(req, res) {
   if (!formSubmitResp.ok) {
     const text = await formSubmitResp.text();
     console.error("FormSubmit email failed:", text);
+    return res.status(500).json({ error: "Email failed", err });
   }
 
   return res.status(200).json({ success: true });
