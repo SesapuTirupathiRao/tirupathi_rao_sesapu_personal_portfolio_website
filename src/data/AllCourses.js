@@ -4,10 +4,18 @@ const dummyCourses = [
   {
     id: 1,
     title: "Core Python",
-    description: "Master the fundamentals of Python programming.",
-    details:
-      "This course covers Python basics, data types, control flow, functions, and basic OOP.",
-    structure: "Day 1: Basics\nDay 2: Data Types\nDay 3: Control Flow\n...",
+    description:
+      "Master Python from scratch: fundamentals, data types, control flow, OOP, functions, modules, packages, and real-world projects—ideal for beginners and those looking to strengthen their programming foundation.",
+    details: [
+      "This Core Python course provides a thorough introduction to programming and Python, starting from the very basics. The journey begins with an overview of programming languages, their types, and paradigms, giving you a strong foundation for understanding how Python fits into the broader world of software development.",
+      "You’ll then explore Python’s history, features, and real-world applications, followed by hands-on guidance for installing Python and using popular IDEs. The course covers essential language fundamentals such as keywords, identifiers, data types, and syntax, and explains the differences between Python and other languages like Java.",
+      "You’ll learn to write and run Python programs in both interactive and scripting modes, including how to add comments and use different editors. Key topics include working with variables, string formatting, input/output operations, and data conversion functions.",
+      "The course then delves into Python’s operators, covering arithmetic, comparison, assignment, logical, bitwise, shift, membership, identity, and ternary operators, as well as operator precedence and the difference between 'is' and '=='.",
+      "You’ll master control statements, including conditional statements (if, if-else, if-elif-else, nested-if), loop statements (for, while, nested loops), and branching statements (break, continue, pass, return). The course also introduces data structures, explaining sequences (strings, lists, tuples) and non-sequences (sets, frozensets, dictionaries), along with their importance and applications.",
+      "Function programming is covered in detail, from defining and calling functions to understanding arguments, lambda functions, nested functions, and the use of global and non-local variables. You’ll also learn about closures, decorators, and generators.",
+      "Finally, the course explores modular programming with Python modules and packages, including creating and importing modules, using module aliases, and understanding built-in module properties. You’ll learn how to organize projects into packages, the difference between packages and folders, the role of the __init__.py file, and how to use PIP for package management.",
+      "By the end of this course, you’ll have a solid grasp of Python’s core concepts and be ready to build your own projects or continue to more advanced topics.",
+    ],
     course_structure: [
       {
         unit: 1,
@@ -177,7 +185,6 @@ const dummyCourses = [
     projects: ["Calculator", "Guess the Number"],
     offerPrice: "₹499",
     originalPrice: "₹1999",
-    thumbnail: "https://source.unsplash.com/featured/?python",
     images: [courseImages.python], // Using the imported image
   },
 ];
