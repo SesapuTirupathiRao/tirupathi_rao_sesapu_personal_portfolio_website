@@ -9,6 +9,7 @@ import hms4 from "./HostelManagementSystem/4. Visitors -- Python -- Tkinter -- M
 import hms5 from "./HostelManagementSystem/5. View Information -- Python -- Tkinter -- MySQL -- Hostel Management System -- Tirupathi Rao Sesapu.png";
 import hms6 from "./HostelManagementSystem/6. Leave Room -- Python -- Tkinter -- MySQL -- Hostel Management System -- Tirupathi Rao Sesapu.png";
 import scl1 from "./ScientificCalculator/scientificCalculator.png";
+import python from "./Courses/python.png";
 
 export const images = {
   scientificCalculatorFullPart,
@@ -22,4 +23,8 @@ export const images = {
   hms5,
   hms6,
   scl1,
+};
+
+export const courseImages = {
+  python,
 };

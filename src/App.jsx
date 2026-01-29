@@ -9,18 +9,20 @@ import Footer from "./components/Footer";
 import SampleProjects from "./components/SampleProjects";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import Playlists from "./components/Playlists";
 
 function App() {
   return (
     <div className="min-h-screen">
       {/* your components */}
-      <ToastContainer position="top-right" autoClose={5000}/>
+      <ToastContainer position="top-right" autoClose={5000} />
       <Header />
       <Hero />
       <About />
       <Projects />
       <SampleProjects />
       <Courses />
+      <Playlists />
       <Content />
       <Contact />
       <Footer />

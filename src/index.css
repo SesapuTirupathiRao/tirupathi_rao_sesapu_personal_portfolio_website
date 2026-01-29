@@ -32,3 +32,15 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;           /* Chrome, Safari, Opera */
 }
+
+.check-mark-list {
+  list-style: none; /* Remove default bullets */
+  padding-left: 0;
+}
+
+.check-mark-list li::before {
+  content: "*"; /* Check mark symbol */
+  color: white; /* Change to your desired color */
+  font-weight: bold;
+  margin-right: 8px;
+}
