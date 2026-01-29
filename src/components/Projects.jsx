@@ -5,12 +5,14 @@ import {
   CheckSquare,
   Landmark,
   Building,
+  GraduationCap,
   Globe,
   Users,
   TrendingUp,
   UserPlus,
   ExternalLink,
 } from "lucide-react";
+// import { build } from "vite";
 
 const Projects = () => {
   const projects = [
@@ -22,6 +24,15 @@ const Projects = () => {
       icon: Landmark,
       color: "from-yellow-500 to-yellow-600",
       link: "http://codekreations.in/",
+    },
+    {
+      title: "Harsewa",
+      description:
+        "Digital governance platform simplifying access to government schemes, scholarships, jobs, and welfare programs. Built with React, Node.js, and MySQL, featuring real-time updates, region-specific data, and a responsive, mobile-first interface.",
+      tech: "React + Tailwind CSS + Node.js",
+      icon: GraduationCap,
+      color: "from-yellow-500 to-yellow-600",
+      link: "https://harsewa.in/",
     },
   ];
 
@@ -54,11 +65,11 @@ const Projects = () => {
                     {project.tech}
                   </span>
                 </div>
-                <div className="p-6">
+                <div className="p-6 mt-auto">
                   <p className="text-gray-300 mb-4 leading-relaxed">
                     {project.description}
                   </p>
-                  
+
                   <Link
                     to={project.link}
                     target="_blank"

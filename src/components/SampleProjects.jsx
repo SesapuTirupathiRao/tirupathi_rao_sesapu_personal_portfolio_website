@@ -93,12 +93,16 @@ const SampleProjects = () => {
   };
 
   return (
-    <section className="py-16 px-4 md:px-12 bg-gray-950 text-white">
-      <h2 className="text-3xl font-bold text-center mb-6">Sample Projects</h2>
-      <p className="text-center text-gray-400 mb-10">
-        A collection of personal projects built for practice and skill
-        development.
-      </p>
+    <section className="py-16 px-4 md:px-12 bg-gray-900 text-white">
+      <div className="text-center mb-16">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          Sample Projects
+        </h2>
+        <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          A collection of personal projects built for practice and skill
+          development.
+        </p>
+      </div>
 
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
         {sampleProjects.map((project) => (

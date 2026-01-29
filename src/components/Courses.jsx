@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import Slider from "react-slick";
-import dummyCourses from "../data/AllCourses"; // Importing the dummy courses data
+import Courses from "../data/AllCourses"; // Importing the dummy courses data
 
 const CustomArrow = (props) => {
   const { className, style, onClick } = props;
@@ -74,15 +74,19 @@ const CoursesSection = () => {
   };
 
   return (
-    <section className="py-16 px-4 md:px-12 bg-gray-950 text-white">
-      <h2 className="text-3xl font-bold text-center mb-6">All Courses</h2>
-      <p className="text-center text-gray-400 mb-10">
-        Explore a variety of courses designed to boost your skills and guide
-        your learning journey in tech.
-      </p>
+    <section id="courses" className="py-16 px-4 md:px-12 bg-black text-white">
+      <div className="text-center mb-16">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          All Courses
+        </h2>
+        <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          Explore a variety of courses designed to boost your skills and guide
+          your learning journey in tech.
+        </p>
+      </div>
 
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-        {dummyCourses.map((course) => (
+        {Courses.map((course) => (
           <div
             key={course.id}
             className="bg-gray-800 p-5 rounded-xl text-white shadow hover:shadow-lg transition flex flex-col h-full"
@@ -101,7 +105,7 @@ const CoursesSection = () => {
             </p>
             <div className="mt-auto">
               <div className="flex flex-wrap gap-2 mb-4 items-center">
-                <span className="text-xs font-bold text-yellow-400">
+                <span className="text-xl font-bold text-yellow-400">
                   Projects:
                 </span>
                 {course.projects.map((tech, idx) => (
@@ -180,17 +184,6 @@ const CoursesSection = () => {
               ) : (
                 <p className="mt-4 text-gray-300">{selectedCourse.details}</p>
               )}
-
-              {/* <div className="flex flex-wrap gap-2 mt-3">
-                {selectedCourse.projects.map((tech, idx) => (
-                  <span
-                    key={idx}
-                    className="bg-yellow-500 text-black px-2 py-1 rounded text-sm"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div> */}
 
               <div className="mt-6">
                 <h3 className="text-lg font-bold text-yellow-400 mb-2">

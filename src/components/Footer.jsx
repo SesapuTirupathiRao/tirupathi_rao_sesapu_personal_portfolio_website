@@ -85,15 +85,14 @@ const Footer = () => {
                 Blog
               </a>
               <a
-                href="https://github.com/TirupathiRaoSesapu"
+                href="https://github.com/SesapuTirupathiRao"
                 target="_blank"
                 className="block text-gray-400 hover:text-yellow-400 transition-colors duration-200"
               >
                 GitHub
               </a>
               <a
-                href="mailto:tirupathistr@gmail.com"
-                target="_blank"
+                href="mailto:tirupathiraosesapu@gmail.com?subject=Contact%20from%20Portfolio"
                 className="block text-gray-400 hover:text-yellow-400 transition-colors duration-200"
               >
                 Email

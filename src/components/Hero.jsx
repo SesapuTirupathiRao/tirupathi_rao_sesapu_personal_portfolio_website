@@ -22,32 +22,35 @@ const Hero = () => {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
-            Tirupathi Rao
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-500">
+            Tirupathi Rao{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-500">
               Sesapu
             </span>
           </h1>
 
           <div className="flex flex-wrap justify-center gap-4 text-lg md:text-xl text-gray-300">
             <span className="px-4 py-2 bg-gray-800 border border-yellow-500/30 rounded-full shadow-sm">
-              Python Developer
+              Full Stack Developer
+            </span>
+            <span className="px-4 py-2 bg-gray-800 border border-yellow-500/30 rounded-full shadow-sm">
+              Tech Educator (Telugu)
             </span>
             <span className="px-4 py-2 bg-gray-800 border border-yellow-500/30 rounded-full shadow-sm">
               Content Creator
             </span>
-            <span className="px-4 py-2 bg-gray-800 border border-yellow-500/30 rounded-full shadow-sm">
-              Tech Educator
-            </span>
           </div>
 
-          <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            I'm a passionate self-taught programmer and educator from India,
-            helping students learn
+          <p className="text-xl md:text-2xl text-gray-300 w-full mx-auto leading-relaxed">
+            I’m a passionate Full Stack Developer and Tech Educator from India, focused on helping students and freshers build strong careers in software development. I teach and build real-world applications using
             <span className="text-yellow-400 font-semibold">
               {" "}
-              Python, Tkinter, Django, and React
+              React, Node.js, Python, Django, MySQL and MongoDB,
             </span>{" "}
-            in Telugu. I build real-world projects and simplify tech learning.
+            and I explain complex concepts in {" "}
+            <span className="text-yellow-400 font-semibold">
+              simple Telugu
+            </span> {" "}
+            through practical projects and tutorials. My mission is to make quality tech education accessible and career-oriented.
           </p>
 
           <div className="flex flex-col sm:mb-20 sm:flex-row sm:justify-center sm:space-x-6 space-y-4 sm:space-y-0 pt-8 items-center">
@@ -55,12 +58,12 @@ const Hero = () => {
               href="#contact"
               className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-yellow-500/30 transform hover:-translate-y-1 transition-all duration-300"
             >
-              Start Learning with Me
+              Learn Full Stack with Me
             </a>
 
             <div className="flex space-x-4">
               <a
-                href="https://github.com/TirupathiRaoSesapu"
+                href="https://github.com/SesapuTirupathiRao"
                 target="_blank"
                 className="w-12 h-12 bg-gray-800 border border-yellow-500/30 rounded-full flex items-center justify-center shadow-md hover:shadow-lg hover:shadow-yellow-500/20 transition-shadow duration-300"
               >
